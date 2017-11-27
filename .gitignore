@@ -2,5 +2,10 @@
 .gradle
 .DS_Store
 /build
-.idea
+#idea
+.idea/
+/idea/
+*.ipr
+*.iml
+*.iws
 local.properties

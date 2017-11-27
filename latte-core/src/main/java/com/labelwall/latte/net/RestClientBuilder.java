@@ -8,6 +8,7 @@ import com.labelwall.latte.net.callback.IRequest;
 import com.labelwall.latte.net.callback.ISuccess;
 import com.labelwall.latte.ui.LoaderStyle;
 
+import java.io.File;
 import java.util.WeakHashMap;
 
 import okhttp3.MediaType;
@@ -29,6 +30,8 @@ public class RestClientBuilder {
 
     private Context mContext = null;
     private LoaderStyle mLoaderStyle = null;
+
+    private File mFile = null;
 
     RestClientBuilder() {
 
@@ -86,7 +89,17 @@ public class RestClientBuilder {
         return this;
     }
 
+    public final RestClientBuilder file(File file) {
+        this.mFile = file;
+        return this;
+    }
+
+    public final RestClientBuilder file(String filePath) {
+        this.mFile = new File(filePath);
+        return this;
+    }
+
     public final RestClient build() {
-        return new RestClient(mUrl, PARAMS, mRequest, mISuccess, mIFailure, mIError, mBody, mLoaderStyle, mContext);
+        return new RestClient(mUrl, PARAMS, mRequest, mISuccess, mIFailure, mIError, mBody, mLoaderStyle, mContext, mFile);
     }
 }

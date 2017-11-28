@@ -6,7 +6,7 @@ import com.labelwall.latte.net.callback.IError;
 import com.labelwall.latte.net.callback.IFailure;
 import com.labelwall.latte.net.callback.IRequest;
 import com.labelwall.latte.net.callback.ISuccess;
-import com.labelwall.latte.ui.LoaderStyle;
+import com.labelwall.latte.ui.loader.LoaderStyle;
 
 import java.io.File;
 import java.util.WeakHashMap;

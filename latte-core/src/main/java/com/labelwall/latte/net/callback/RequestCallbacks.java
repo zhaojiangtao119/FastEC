@@ -2,8 +2,8 @@ package com.labelwall.latte.net.callback;
 
 import android.os.Handler;
 
-import com.labelwall.latte.ui.LatteLoader;
-import com.labelwall.latte.ui.LoaderStyle;
+import com.labelwall.latte.ui.loader.LatteLoader;
+import com.labelwall.latte.ui.loader.LoaderStyle;
 
 import retrofit2.Call;
 import retrofit2.Callback;

@@ -8,8 +8,8 @@ import com.labelwall.latte.net.callback.IRequest;
 import com.labelwall.latte.net.callback.ISuccess;
 import com.labelwall.latte.net.callback.RequestCallbacks;
 import com.labelwall.latte.net.download.DownloadHandler;
-import com.labelwall.latte.ui.LatteLoader;
-import com.labelwall.latte.ui.LoaderStyle;
+import com.labelwall.latte.ui.loader.LatteLoader;
+import com.labelwall.latte.ui.loader.LoaderStyle;
 
 import java.io.File;
 import java.util.Map;

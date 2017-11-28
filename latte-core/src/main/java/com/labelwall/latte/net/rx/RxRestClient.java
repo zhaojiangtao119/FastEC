@@ -4,8 +4,8 @@ import android.content.Context;
 
 import com.labelwall.latte.net.HttpMethod;
 import com.labelwall.latte.net.RestCreator;
-import com.labelwall.latte.ui.LatteLoader;
-import com.labelwall.latte.ui.LoaderStyle;
+import com.labelwall.latte.ui.loader.LatteLoader;
+import com.labelwall.latte.ui.loader.LoaderStyle;
 
 import java.io.File;
 import java.util.Map;

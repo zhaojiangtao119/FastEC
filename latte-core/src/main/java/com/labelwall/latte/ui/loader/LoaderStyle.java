@@ -1,4 +1,4 @@
-package com.labelwall.latte.ui;
+package com.labelwall.latte.ui.loader;
 
 /**
  * Created by Administrator on 2017-11-27.

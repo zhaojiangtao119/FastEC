@@ -1,4 +1,4 @@
-package com.labelwall.latte.ec;
+package com.labelwall.latte.ec.icon;
 
 import com.joanzapata.iconify.Icon;
 

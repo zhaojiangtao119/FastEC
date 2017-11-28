@@ -1,4 +1,4 @@
-package com.labelwall.latte.ui;
+package com.labelwall.latte.ui.loader;
 
 import android.content.Context;
 

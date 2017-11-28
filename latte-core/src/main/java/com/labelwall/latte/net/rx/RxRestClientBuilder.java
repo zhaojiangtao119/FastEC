@@ -3,7 +3,7 @@ package com.labelwall.latte.net.rx;
 import android.content.Context;
 
 import com.labelwall.latte.net.RestCreator;
-import com.labelwall.latte.ui.LoaderStyle;
+import com.labelwall.latte.ui.loader.LoaderStyle;
 
 import java.io.File;
 import java.util.WeakHashMap;

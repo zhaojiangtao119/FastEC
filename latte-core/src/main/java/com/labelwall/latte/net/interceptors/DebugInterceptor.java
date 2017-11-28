@@ -43,7 +43,7 @@ public class DebugInterceptor extends BaseInterceptor{
 
     @Override
     public Response intercept(Chain chain) throws IOException {
-        final String url = chain.request().url().toString();
+        final String url = chain.request().url().toString();//获取请求的url
         if(url.contains(DEBUG_URL)){//获取的url如果包含所要拦截的关键字
             return debugResponse(chain,DEBUG_RAW_ID);//
         }

@@ -7,6 +7,7 @@ import com.labelwall.latte.net.callback.IFailure;
 import com.labelwall.latte.net.callback.IRequest;
 import com.labelwall.latte.net.callback.ISuccess;
 import com.labelwall.latte.net.callback.RequestCallbacks;
+import com.labelwall.latte.net.download.DownloadHandler;
 import com.labelwall.latte.ui.LatteLoader;
 import com.labelwall.latte.ui.LoaderStyle;
 
@@ -39,6 +40,10 @@ public class RestClient {
 
     private final File FILE;
 
+    private final String DOWNLOAD_DIR;
+    private final String EXTENSION;
+    private final String NAME;
+
     public RestClient(String url,
                       Map<String, Object> params,
                       IRequest request,
@@ -48,7 +53,10 @@ public class RestClient {
                       ResponseBody body,
                       LoaderStyle loaderStyle,
                       Context context,
-                      File file) {
+                      File file,
+                      String downloadDir,
+                      String extension,
+                      String name) {
         this.URL = url;
         PARAMS.putAll(params);
         this.REQUEST = request;
@@ -61,6 +69,10 @@ public class RestClient {
         this.CONTEXT = context;
 
         this.FILE = file;
+
+        this.DOWNLOAD_DIR = downloadDir;
+        this.EXTENSION = extension;
+        this.NAME = name;
     }
 
     public static RestClientBuilder builder() {
@@ -145,4 +157,11 @@ public class RestClient {
         request(HttpMethod.DELETE);
     }
 
+    public final void upload() {
+        request(HttpMethod.UPLOAD);
+    }
+
+    public final void download(){
+        new DownloadHandler(URL,REQUEST,SUCCESS,FAILURE,ERROR,DOWNLOAD_DIR,EXTENSION,NAME).handlerDownload();
+    }
 }

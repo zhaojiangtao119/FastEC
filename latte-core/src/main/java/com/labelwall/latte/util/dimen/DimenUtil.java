@@ -1,4 +1,4 @@
-package com.labelwall.latte.util;
+package com.labelwall.latte.util.dimen;
 
 import android.content.res.Resources;
 import android.util.DisplayMetrics;

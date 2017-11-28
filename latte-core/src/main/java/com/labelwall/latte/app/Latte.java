@@ -10,17 +10,18 @@ import java.util.HashMap;
 
 public class Latte {
 
-    public static Configurator init(Context context){
-        getConfigurations().put(ConfigType.APPLICATION_CONTEXT.name(),context.getApplicationContext());
+    public static Configurator init(Context context){//初始化配置项
+        getConfigurations().put(ConfigKeys.APPLICATION_CONTEXT,context.getApplicationContext());
         return Configurator.getInstance();
     }
 
-    public static HashMap<String,Object> getConfigurations(){
+    public static HashMap<Object,Object> getConfigurations(){//获取配置项
         return Configurator.getInstance().getLatteConfig();
     }
 
-    public static Context getApplication(){
-        return (Context) getConfigurations().get(ConfigType.APPLICATION_CONTEXT.name());
+
+    public static Context getApplication(){//获取applicationContext
+        return (Context) getConfigurations().get(ConfigKeys.APPLICATION_CONTEXT);
     }
 
 }

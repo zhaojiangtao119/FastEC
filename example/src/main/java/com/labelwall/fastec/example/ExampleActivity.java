@@ -6,7 +6,7 @@ import android.support.v7.app.ActionBar;
 
 import com.labelwall.latte.activitys.ProxyActivity;
 import com.labelwall.latte.delegates.LatteDelegate;
-import com.labelwall.latte.ec.launcher.LauncherDelegate;
+import com.labelwall.latte.ec.sign.SignUpDelegate;
 
 public class ExampleActivity extends ProxyActivity {
 
@@ -21,6 +21,6 @@ public class ExampleActivity extends ProxyActivity {
 
     @Override
     public LatteDelegate setRootDelegate() {
-        return new LauncherDelegate();
+        return new SignUpDelegate();
     }
 }

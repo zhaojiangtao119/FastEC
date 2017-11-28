@@ -24,7 +24,7 @@ import butterknife.OnClick;
  */
 
 public class LauncherDelegate extends LatteDelegate implements ITimerListener{
-
+    //使用butterknife来初始化组件
     @BindView(R2.id.tv_launcher_timer)
     AppCompatTextView mTvTimer = null;
 

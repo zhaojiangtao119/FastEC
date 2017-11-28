@@ -1,5 +1,6 @@
 package com.labelwall.latte.ec.sign;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
@@ -12,6 +13,7 @@ import com.labelwall.latte.ec.R;
 import com.labelwall.latte.ec.R2;
 import com.labelwall.latte.net.RestClient;
 import com.labelwall.latte.net.callback.ISuccess;
+import com.labelwall.latte.util.log.LatteLogger;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -33,17 +35,32 @@ public class SignUpDelegate extends LatteDelegate {
     @BindView(R2.id.edit_sign_up_re_password)
     TextInputEditText mRePassword = null;
 
+
+    private ISignListener mISignListener = null;
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        if(activity instanceof ISignListener){
+            mISignListener = (ISignListener) activity;
+        }
+    }
+
     @OnClick(R2.id.btn_sign_up)
     void onClickSignUp(){
         if(checkForm()){
-            //请求服务端
+            //请求服务端，进行注册
             RestClient.builder()
                     .url("sign_up")
-                    .params("","")
+                    .params("name",mName.getText().toString())
+                    .params("email",mEmail.getText().toString())
+                    .params("phone",mPhone.getText().toString())
+                    .params("password",mPassword.getText().toString())
                     .success(new ISuccess() {
                         @Override
                         public void onSuccess(String response) {
-
+                            LatteLogger.json("USER_PROFILE",response);
+                            SignHandler.onSignUp(response,mISignListener);//将注册成功后用户信息插入到greenDao数据库中
                         }
                     })
                     .build()

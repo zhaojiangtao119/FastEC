@@ -1,14 +1,19 @@
 package com.labelwall.latte.ec.sign;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
 import android.util.Patterns;
 import android.view.View;
+import android.widget.Toast;
 
 import com.labelwall.latte.delegates.LatteDelegate;
 import com.labelwall.latte.ec.R;
 import com.labelwall.latte.ec.R2;
+import com.labelwall.latte.net.RestClient;
+import com.labelwall.latte.net.callback.ISuccess;
+import com.labelwall.latte.util.log.LatteLogger;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -25,10 +30,34 @@ public class SignInDelegate extends LatteDelegate {
     @BindView(R2.id.edit_sign_in_password)
     TextInputEditText mPassword = null;
 
+    private ISignListener mISignListener = null;
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        if(activity instanceof ISignListener){
+            mISignListener = (ISignListener) activity;
+        }
+    }
+
     @OnClick(R2.id.btn_sign_in)
     void onClickSignIn() {
         if(checkForm()){
-
+            //请求服务端,进行登录
+            RestClient.builder()
+                    .url("sign_in")
+                    .params("email",mEmail.getText().toString())
+                    .params("password",mPassword.getText().toString())
+                    .success(new ISuccess() {
+                        @Override
+                        public void onSuccess(String response) {
+                            LatteLogger.json("USER_PROFILE",response);
+                            SignHandler.onSignIn(response,mISignListener);
+                        }
+                    })
+                    .build()
+                    .get();
+            Toast.makeText(getContext(), "验证通过", Toast.LENGTH_SHORT).show();
         }
     }
 

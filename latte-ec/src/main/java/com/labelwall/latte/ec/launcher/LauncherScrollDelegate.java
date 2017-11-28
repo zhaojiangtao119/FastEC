@@ -1,14 +1,19 @@
 package com.labelwall.latte.ec.launcher;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.listener.OnItemClickListener;
+import com.labelwall.latte.app.AccountManager;
+import com.labelwall.latte.app.IUserChecker;
 import com.labelwall.latte.delegates.LatteDelegate;
 import com.labelwall.latte.ec.R;
+import com.labelwall.latte.ui.launcher.ILauncherListener;
 import com.labelwall.latte.ui.launcher.LauncherHolderCreator;
+import com.labelwall.latte.ui.launcher.OnLauncherFinishTag;
 import com.labelwall.latte.ui.launcher.ScrollLauncherTag;
 import com.labelwall.latte.util.storage.LattePreference;
 
@@ -23,6 +28,8 @@ public class LauncherScrollDelegate extends LatteDelegate implements OnItemClick
     private ConvenientBanner<Integer> mConvenientBanner = null;
     private ArrayList<Integer> INTEGERS = new ArrayList<>();
 
+    private ILauncherListener mILauncherListener = null;
+
     private void initBanner(){
         INTEGERS.add(R.mipmap.launcher_01);
         INTEGERS.add(R.mipmap.launcher_02);
@@ -35,6 +42,14 @@ public class LauncherScrollDelegate extends LatteDelegate implements OnItemClick
                 .setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.CENTER_HORIZONTAL)//水平居中
                 .setOnItemClickListener(this)//设置监听
                 .setCanLoop(false);//设置循环
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        if (activity instanceof ILauncherListener) {
+            mILauncherListener = (ILauncherListener) activity;
+        }
     }
 
     @Override
@@ -52,10 +67,24 @@ public class LauncherScrollDelegate extends LatteDelegate implements OnItemClick
     public void onItemClick(int position) {
         //如果点击的最后一个图片
         if(position == INTEGERS.size()-1){
-            //第一进入该App，显示轮播，之后进入不再显示
+            //第一次进入该App，显示轮播，之后进入不再显示
             LattePreference.setAppFlag(ScrollLauncherTag.HAS_FIRST_LAUNCHER_APP.name(),true);
-            //TODO 检查用户是否已经登录
+            //检查用户是否已经登录
+            AccountManager.checkAccount(new IUserChecker() {
+                @Override
+                public void onSignIn() {//
+                    if (mILauncherListener != null) {
+                        mILauncherListener.onLauncherFinish(OnLauncherFinishTag.SIGNED);
+                    }
+                }
 
+                @Override
+                public void onNotSignIn() {
+                    if (mILauncherListener != null) {
+                        mILauncherListener.onLauncherFinish(OnLauncherFinishTag.NOT_SIGNED);
+                    }
+                }
+            });
         }
     }
 }

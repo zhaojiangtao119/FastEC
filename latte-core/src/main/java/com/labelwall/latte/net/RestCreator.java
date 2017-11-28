@@ -26,12 +26,17 @@ public class RestCreator {
         return ParamsHolder.PARAMS;
     }
 
-    //将restService返回出去
+    /**
+     * 将restService返回出去
+     * @return
+     */
     public static RestService getRestService() {
         return RestServiceHolder.REST_SERVICE;
     }
 
-    //初始化retrofit
+    /**
+     * 初始化retrofit
+     */
     private static final class RetrofitHandler {
         //获取初始化application是传入的base_url
         private static final String BASE_URL = (String) Latte.getConfigurations().get(ConfigKeys.API_HOST);
@@ -42,11 +47,13 @@ public class RestCreator {
                 .build();
     }
 
-    //初始化okHttp
+    /**
+     * 初始化okHttp
+     */
     private static final class OkHttpHolder {
         private static final int TIME_OUT = 60;
 
-        //加入拦截器
+        //加入拦截器,将配置文件中的拦截器片配置到OkHttpCilent对象中
         private static final OkHttpClient.Builder BUILDER = new OkHttpClient.Builder();
         private static final ArrayList<Interceptor> INTERCEPTORS = (ArrayList<Interceptor>) Latte.getConfigurations().get(ConfigKeys.INTERCEPTOR);
         private static OkHttpClient.Builder addInterceptor(){
@@ -63,7 +70,9 @@ public class RestCreator {
                 .build();
     }
 
-    //初始化RestService
+    /**
+     * 初始化RestService
+     */
     private static final class RestServiceHolder {
         private static final RestService REST_SERVICE =
                 RetrofitHandler.RETROFIT_CLIENT.create(RestService.class);

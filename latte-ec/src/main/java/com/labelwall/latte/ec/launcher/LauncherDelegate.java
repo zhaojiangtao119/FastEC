@@ -80,15 +80,17 @@ public class LauncherDelegate extends LatteDelegate implements ITimerListener {
             //检查用户是否登录了App
             AccountManager.checkAccount(new IUserChecker() {
                 @Override
-                public void onSignIn() {//
+                public void onSignIn() {//登陆了
                     if (mILauncherListener != null) {
+                        //将Tag设置为SIGNED
                         mILauncherListener.onLauncherFinish(OnLauncherFinishTag.SIGNED);
                     }
                 }
 
                 @Override
-                public void onNotSignIn() {
+                public void onNotSignIn() {//未登录
                     if (mILauncherListener != null) {
+                        //将Tag设置为NOT_SIGNED
                         mILauncherListener.onLauncherFinish(OnLauncherFinishTag.NOT_SIGNED);
                     }
                 }

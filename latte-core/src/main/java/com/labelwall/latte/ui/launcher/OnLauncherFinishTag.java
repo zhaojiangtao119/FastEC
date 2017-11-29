@@ -5,6 +5,6 @@ package com.labelwall.latte.ui.launcher;
  */
 
 public enum  OnLauncherFinishTag {
-    SIGNED,
-    NOT_SIGNED
+    SIGNED, //用户登录了
+    NOT_SIGNED//未登录
 }

@@ -5,7 +5,7 @@ package com.labelwall.latte.ec.sign;
  */
 
 public interface ISignListener {
-
+    //登陆成功，注册成功监听
     void onSignInSuccess();
 
     void onSignUpSuccess();

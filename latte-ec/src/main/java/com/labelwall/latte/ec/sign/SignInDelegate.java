@@ -32,6 +32,7 @@ public class SignInDelegate extends LatteDelegate {
 
     private ISignListener mISignListener = null;
 
+    //Activity与Fragment的通信
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -52,7 +53,7 @@ public class SignInDelegate extends LatteDelegate {
                         @Override
                         public void onSuccess(String response) {
                             LatteLogger.json("USER_PROFILE",response);
-                            SignHandler.onSignIn(response,mISignListener);
+                            SignHandler.onSignIn(response,mISignListener);//登陆成功
                         }
                     })
                     .build()

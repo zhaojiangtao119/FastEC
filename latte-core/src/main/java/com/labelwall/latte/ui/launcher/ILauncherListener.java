@@ -6,6 +6,6 @@ package com.labelwall.latte.ui.launcher;
 
 public interface ILauncherListener {
 
-    void onLauncherFinish(OnLauncherFinishTag tag);
+    void onLauncherFinish(OnLauncherFinishTag tag);//App入口的结束的监听
 
 }

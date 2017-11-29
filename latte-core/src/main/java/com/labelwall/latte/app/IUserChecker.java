@@ -6,7 +6,7 @@ package com.labelwall.latte.app;
 
 public interface IUserChecker {
 
-    void onSignIn();
-    void onNotSignIn();
+    void onSignIn();//已经登录
+    void onNotSignIn();//未登录
 
 }

@@ -3,14 +3,13 @@ package com.labelwall.latte.app;
 import com.labelwall.latte.util.storage.LattePreference;
 
 /**
- * Created by Administrator on 2017-11-28.
+ * Created by Administrator on 2017-11-28. 保存用户的登录状态，判断用户的登录状态
  */
 
 public class AccountManager {
 
     private enum SignTag {
         SIGN_TAG //登录标志
-
     }
 
     //保存用户的登录状态，登录后调用

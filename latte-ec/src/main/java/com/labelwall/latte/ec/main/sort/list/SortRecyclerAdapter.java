@@ -5,8 +5,10 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.AppCompatTextView;
 import android.view.View;
 
+import com.labelwall.latte.delegates.LatteDelegate;
 import com.labelwall.latte.ec.R;
 import com.labelwall.latte.ec.main.sort.SortDelegate;
+import com.labelwall.latte.ec.main.sort.content.ContentDelegate;
 import com.labelwall.latte.ui.recycler.ItemType;
 import com.labelwall.latte.ui.recycler.MultipleFields;
 import com.labelwall.latte.ui.recycler.MultipleItemEntity;
@@ -47,16 +49,17 @@ public class SortRecyclerAdapter extends MultipleRecyclerAdapter {
                     @Override
                     public void onClick(View v) {
                         final int currentPosition = holder.getAdapterPosition();//获取当前(适配器中)的位置
-                        if(mPrePosition != currentPosition){
+                        if (mPrePosition != currentPosition) {
                             //还原上一个item样式
-                            getData().get(mPrePosition).setField(MultipleFields.TAG,false);
+                            getData().get(mPrePosition).setField(MultipleFields.TAG, false);
                             notifyItemChanged(mPrePosition);
                             //设置当前选中的样式
-                            entity.setField(MultipleFields.TAG,true);
+                            entity.setField(MultipleFields.TAG, true);
                             notifyItemChanged(currentPosition);
                             mPrePosition = currentPosition;
-
+                            //改变右侧content
                             final int contentId = getData().get(currentPosition).getField(MultipleFields.ID);
+                            showContent(contentId);
                         }
                     }
                 });
@@ -75,6 +78,18 @@ public class SortRecyclerAdapter extends MultipleRecyclerAdapter {
                 break;
             default:
                 break;
+        }
+    }
+
+    public void showContent(int contentId) {
+        final ContentDelegate delegate = ContentDelegate.newInstance(contentId);
+        switchContent(delegate);
+    }
+
+    public void switchContent(ContentDelegate delegate) {
+        final LatteDelegate contentDelegate = DELEGATE.findChildFragment(ContentDelegate.class);
+        if (contentDelegate != null) {
+            contentDelegate.replaceFragment(delegate, false);
         }
     }
 }

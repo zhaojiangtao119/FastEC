@@ -11,7 +11,7 @@ import com.labelwall.latte.ui.recycler.MultipleItemEntity;
 import java.util.ArrayList;
 
 /**
- * Created by Administrator on 2017-11-30.
+ * Created by Administrator on 2017-11-30. 分类数据的转换
  */
 
 public final class VerticalListDataConverter extends DataConverter {

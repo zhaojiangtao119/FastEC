@@ -37,7 +37,7 @@ public class IndexItemClickListener extends SimpleClickListener{
 
     @Override
     public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-
+    //341223243013
     }
 
     @Override

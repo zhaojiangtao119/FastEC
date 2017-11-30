@@ -38,39 +38,40 @@ public class IndexDelegate extends BottomItemDelegate {
 
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, View rootView) {
-        mRefreshHandler = RefreshHandler.create(mRefreshLayout,mRecyclerView,new IndexDataConverter());
+        //RefreshLayout， mRecyclerView，数据转换器IndexDataConverter
+        mRefreshHandler = RefreshHandler.create(mRefreshLayout, mRecyclerView, new IndexDataConverter());
     }
 
     //初始化RecyclerView
-    private void initRecyclerView(){
-        final GridLayoutManager manager = new GridLayoutManager(getContext(),4);
+    private void initRecyclerView() {
+        final GridLayoutManager manager = new GridLayoutManager(getContext(), 4);
         mRecyclerView.setLayoutManager(manager);
         //设置RecyclerView分割线
         mRecyclerView.addItemDecoration
-                (BaseDecoration.create(ContextCompat.getColor(getContext(),R.color.app_background),5));
+                (BaseDecoration.create(ContextCompat.getColor(getContext(), R.color.app_background), 5));
         //设置单击事件监听
         final EcBottomDelegate exBottomDelegate = getParentDelegate();
         mRecyclerView.addOnItemTouchListener(IndexItemClickListener.create(exBottomDelegate));
     }
 
-    private void initRefreshLayout(){
+    private void initRefreshLayout() {
         mRefreshLayout.setColorSchemeResources(
                 android.R.color.holo_blue_bright,
                 android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
         // true,改变loader形状，120起始的高度，300终止的高度
-        mRefreshLayout.setProgressViewOffset(true,120,300);
+        mRefreshLayout.setProgressViewOffset(true, 120, 300);
 
     }
 
     @Override
     public void onLazyInitView(@Nullable Bundle savedInstanceState) {
         super.onLazyInitView(savedInstanceState);
-        initRefreshLayout();
-        initRecyclerView();
-        //TODO 请求数据
-         //mRefreshHandler.firstPage("请求数据的url");
-}
+        initRefreshLayout();//初始化SwipeRefreshLayout
+        initRecyclerView();//初始化RecyclerView
+        //TODO 请求数据，使用懒加载
+        //mRefreshHandler.firstPage("请求数据的url");
+    }
 
     @Override
     public Object setLayout() {

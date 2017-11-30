@@ -18,6 +18,7 @@ public abstract class DataConverter {
         return this;
     }
 
+    //判断json数据是否为null，校验服务端响应的数据
     protected String getJsonData() {
         if (mJsonData == null || mJsonData.isEmpty()) {
             throw new NullPointerException("Data is null");

@@ -12,5 +12,6 @@ public enum ConfigKeys {
     ICON,
     LOADER_DELAYED,
     INTERCEPTOR,
+    HANDLER,
 
 }

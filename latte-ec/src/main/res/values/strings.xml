@@ -10,4 +10,9 @@
     <string name="login">登录</string>
     <string name="login_hint">还没有账户？立即注册</string>
 
+
+    <string name="index_search_hint">搜索</string>
+
+
+
 </resources>

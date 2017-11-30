@@ -46,6 +46,7 @@ public class SignInDelegate extends LatteDelegate {
         if(checkForm()){
             //请求服务端,进行登录
             RestClient.builder()
+                    //TODO sign_in
                     .url("sign_in")
                     .params("email",mEmail.getText().toString())
                     .params("password",mPassword.getText().toString())

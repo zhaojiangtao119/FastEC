@@ -51,6 +51,7 @@ public class SignUpDelegate extends LatteDelegate {
         if(checkForm()){
             //请求服务端，进行注册
             RestClient.builder()
+                    //TODO sign_up
                     .url("sign_up")
                     .params("name",mName.getText().toString())
                     .params("email",mEmail.getText().toString())

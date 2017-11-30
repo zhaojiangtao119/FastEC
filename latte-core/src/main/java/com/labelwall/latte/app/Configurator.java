@@ -1,5 +1,7 @@
 package com.labelwall.latte.app;
 
+import android.os.Handler;
+
 import com.joanzapata.iconify.IconFontDescriptor;
 import com.joanzapata.iconify.Iconify;
 
@@ -19,8 +21,11 @@ public class Configurator {
     private static final List<IconFontDescriptor> ICONS = new ArrayList<>();//字体
     private static final ArrayList<Interceptor> INTERCEPTORS = new ArrayList<>();//网络拦截器
 
+    private static final Handler HANDLER = new Handler();
+
     private Configurator(){
         LATTE_CONFIGS.put(ConfigKeys.CONFIG_READY,false);//配置开始
+        LATTE_CONFIGS.put(ConfigKeys.HANDLER, HANDLER);
     }
 
     public HashMap<Object,Object> getLatteConfig() {
@@ -80,8 +85,12 @@ public class Configurator {
     }
 
     @SuppressWarnings("unchecked")
-    final <T> T getConfiguration(Enum<ConfigKeys> key){
+    final <T> T getConfiguration(Object key){
         checkConfiguration();
+        final Object value = LATTE_CONFIGS.get(key);
+        if (value == null) {
+            throw new NullPointerException(key.toString() + " IS NULL");
+        }
         return (T) LATTE_CONFIGS.get(key);
     }
 

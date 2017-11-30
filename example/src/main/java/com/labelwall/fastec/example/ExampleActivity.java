@@ -13,6 +13,8 @@ import com.labelwall.latte.ec.sign.ISignListener;
 import com.labelwall.latte.ui.launcher.ILauncherListener;
 import com.labelwall.latte.ui.launcher.OnLauncherFinishTag;
 
+import qiu.niorgai.StatusBarCompat;
+
 public class ExampleActivity extends ProxyActivity implements
         ISignListener, ILauncherListener {
 
@@ -23,6 +25,7 @@ public class ExampleActivity extends ProxyActivity implements
         if (actionBar != null) {
             actionBar.hide();
         }
+        StatusBarCompat.translucentStatusBar(this,true);
     }
 
     @Override

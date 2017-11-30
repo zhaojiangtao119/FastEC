@@ -63,7 +63,7 @@ public class IndexDelegate extends BottomItemDelegate {
         initRefreshLayout();
         initRecyclerView();
         //TODO 请求数据
-        mRefreshHandler.firstPage("请求数据的url");
+         //mRefreshHandler.firstPage("请求数据的url");
 }
 
     @Override

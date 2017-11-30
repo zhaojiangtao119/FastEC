@@ -13,6 +13,7 @@ import com.joanzapata.iconify.widget.IconTextView;
 import com.labelwall.latte.delegates.bottom.BottomItemDelegate;
 import com.labelwall.latte.ec.R;
 import com.labelwall.latte.ec.R2;
+import com.labelwall.latte.ec.main.EcBottomDelegate;
 import com.labelwall.latte.ui.recycler.BaseDecoration;
 import com.labelwall.latte.ui.refresh.RefreshHandler;
 
@@ -44,8 +45,12 @@ public class IndexDelegate extends BottomItemDelegate {
     private void initRecyclerView(){
         final GridLayoutManager manager = new GridLayoutManager(getContext(),4);
         mRecyclerView.setLayoutManager(manager);
+        //设置RecyclerView分割线
         mRecyclerView.addItemDecoration
                 (BaseDecoration.create(ContextCompat.getColor(getContext(),R.color.app_background),5));
+        //设置单击事件监听
+        final EcBottomDelegate exBottomDelegate = getParentDelegate();
+        mRecyclerView.addOnItemTouchListener(IndexItemClickListener.create(exBottomDelegate));
     }
 
     private void initRefreshLayout(){
@@ -55,6 +60,7 @@ public class IndexDelegate extends BottomItemDelegate {
                 android.R.color.holo_red_light);
         // true,改变loader形状，120起始的高度，300终止的高度
         mRefreshLayout.setProgressViewOffset(true,120,300);
+
     }
 
     @Override

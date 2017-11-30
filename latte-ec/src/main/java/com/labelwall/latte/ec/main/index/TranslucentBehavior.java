@@ -9,7 +9,7 @@ import android.view.View;
 import com.labelwall.latte.ec.R;
 
 /**
- * Created by Administrator on 2017-11-30.
+ * Created by Administrator on 2017-11-30.  沉浸式状态栏的实现，改变toolbar颜色
  */
 
 @SuppressWarnings("unused")

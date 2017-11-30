@@ -79,6 +79,7 @@ public class MultipleRecyclerAdapter extends
             case ItemType.TEXT_IMAGE:
                 text = entity.getField(MultipleFields.TEXT);
                 imageUrl = entity.getField(MultipleFields.IMAGE_URL);
+                //图片加载
                 Glide.with(mContext)
                         .load(imageUrl)
                         .diskCacheStrategy(DiskCacheStrategy.ALL)

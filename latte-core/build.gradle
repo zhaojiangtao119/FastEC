@@ -66,6 +66,8 @@ dependencies {
     compile 'org.greenrobot:greendao:3.2.2'
     //RecyclerView依赖
     compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.30'
+    //RecyclerView分割线
+    compile 'com.choices.divider:RecyclerView_Divider:1.0.0'
     //图片处理
     compile 'com.github.bumptech.glide:glide:3.7.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.3.1'

@@ -1,11 +1,14 @@
 package com.labelwall.latte.ec.main.cart;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.joanzapata.iconify.widget.IconTextView;
 import com.labelwall.latte.delegates.bottom.BottomItemDelegate;
 import com.labelwall.latte.ec.R;
 import com.labelwall.latte.ec.R2;
@@ -16,6 +19,7 @@ import com.labelwall.latte.ui.recycler.MultipleItemEntity;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * Created by Administrator on 2017-12-01.
@@ -23,10 +27,29 @@ import butterknife.BindView;
 
 public class ShopCartDelegate extends BottomItemDelegate implements ISuccess {
 
-    private ShopCartAdapter adapter = null;
+    private ShopCartAdapter mAdapter = null;
 
     @BindView(R2.id.rv_shop_cart)
     RecyclerView mRecyclerView = null;
+    //全选单击事件监听
+    @BindView(R2.id.icon_shop_cart_select_all)
+    IconTextView mIconSelectAll = null;
+    @OnClick(R2.id.icon_shop_cart_select_all)
+    void onClickSelectAll(){
+        final int tag = (int) mIconSelectAll.getTag();
+        if(tag == 0){
+            mIconSelectAll.setTextColor(ContextCompat.getColor(getContext(),R.color.app_main));
+            mIconSelectAll.setTag(1);
+            mAdapter.setIsSelectedAll(true);
+            //跟新RecyclerView的显示状态
+            mAdapter.notifyItemRangeChanged(0,mAdapter.getItemCount());
+        }else{
+            mIconSelectAll.setTextColor(Color.GRAY);
+            mIconSelectAll.setTag(0);
+            mAdapter.setIsSelectedAll(false);
+            mAdapter.notifyItemRangeChanged(0,mAdapter.getItemCount());
+        }
+    }
 
 
     @Override
@@ -36,7 +59,7 @@ public class ShopCartDelegate extends BottomItemDelegate implements ISuccess {
 
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, View rootView) {
-
+        mIconSelectAll.setTag(0);//设置初始的全选状态
     }
 
     @Override
@@ -59,7 +82,7 @@ public class ShopCartDelegate extends BottomItemDelegate implements ISuccess {
         //初始化RecycleView
         final LinearLayoutManager manager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(manager);
-        adapter = new ShopCartAdapter(data);
-        mRecyclerView.setAdapter(adapter);
+        mAdapter = new ShopCartAdapter(data);
+        mRecyclerView.setAdapter(mAdapter);
     }
 }

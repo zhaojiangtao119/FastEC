@@ -38,6 +38,7 @@ public class ShopCartDataConverter extends DataConverter {
                     .setField(ShopCartFields.PRICE, price)
                     .setField(ShopCartFields.DESC, data)
                     .setField(ShopCartFields.IS_SELECTED,false)
+                    .setField(ShopCartFields.POSITION,i)//添加商品的位置
                     .build();
             ENTITYS.add(entity);
         }

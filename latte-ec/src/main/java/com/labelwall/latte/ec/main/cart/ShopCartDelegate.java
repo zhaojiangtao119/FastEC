@@ -16,6 +16,7 @@ import com.labelwall.latte.net.RestClient;
 import com.labelwall.latte.net.callback.ISuccess;
 import com.labelwall.latte.ui.recycler.MultipleItemEntity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -28,6 +29,10 @@ import butterknife.OnClick;
 public class ShopCartDelegate extends BottomItemDelegate implements ISuccess {
 
     private ShopCartAdapter mAdapter = null;
+    //购物中item位置的标记，从0开始
+    private int mCurrentCount = 0;
+    //需要移除item的总数
+    private int mTotalCount = 0;
 
     @BindView(R2.id.rv_shop_cart)
     RecyclerView mRecyclerView = null;
@@ -51,6 +56,41 @@ public class ShopCartDelegate extends BottomItemDelegate implements ISuccess {
         }
     }
 
+    //右上角的删除
+    @OnClick(R2.id.tc_top_shop_cart_remove_selected)
+    void onClickRemoveSelectedItem(){
+        final List<MultipleItemEntity> data = mAdapter.getData();
+        //要删除的数据
+        final List<MultipleItemEntity> deleteEntities = new ArrayList<>();
+        for(MultipleItemEntity entity : data){
+            final boolean isSelected = entity.getField(ShopCartFields.IS_SELECTED);
+            if(isSelected){
+                deleteEntities.add(entity);
+            }
+        }
+        for(MultipleItemEntity entity : deleteEntities){
+            int removePosition;
+            final int entityPosition = entity.getField(ShopCartFields.POSITION);
+            if(entityPosition > mCurrentCount - 1){
+                removePosition = entityPosition - (mTotalCount - mCurrentCount);
+            }else{
+                removePosition = entityPosition;
+            }
+            if(removePosition <= mAdapter.getItemCount()){
+                mAdapter.remove(removePosition);
+                mCurrentCount = mAdapter.getItemCount();
+                //更新数据
+                mAdapter.notifyItemRangeChanged(removePosition,mAdapter.getItemCount());
+            }
+        }
+    }
+
+    //清空
+    @OnClick(R2.id.tv_top_shop_cart_clear)
+    void onClickClear(){
+        mAdapter.getData().clear();
+        mAdapter.notifyDataSetChanged();
+    }
 
     @Override
     public Object setLayout() {

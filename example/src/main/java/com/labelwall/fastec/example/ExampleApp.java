@@ -31,7 +31,7 @@ public class ExampleApp extends Application {
                 //添加cookie同步拦截器
                 .withInterceptor(new AddCookieInterceptor())
                 //
-                .withWebHost("https://www.baidu.com/")
+                //.withWebHost("https://www.baidu.com/")
                 .configure();
         //初始化greenDao
         DatabaseManager.getInstance().init(this);

@@ -10,6 +10,7 @@ import com.labelwall.fastec.example.event.TestEvent;
 import com.labelwall.latte.ec.database.DatabaseManager;
 import com.labelwall.latte.ec.icon.FontEcModule;
 import com.labelwall.latte.net.interceptors.DebugInterceptor;
+import com.labelwall.latte.net.rx.AddCookieInterceptor;
 
 /**
  * Created by Administrator on 2017-11-27.
@@ -27,6 +28,10 @@ public class ExampleApp extends Application {
                 .withInterceptor(new DebugInterceptor("index", R.raw.test))
                 .withJavascriptInterface("latte")
                 .withWebEvent("test123",new TestEvent())
+                //添加cookie同步拦截器
+                .withInterceptor(new AddCookieInterceptor())
+                //
+                .withWebHost("https://www.baidu.com/")
                 .configure();
         //初始化greenDao
         DatabaseManager.getInstance().init(this);
